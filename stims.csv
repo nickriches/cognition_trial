@@ -1,0 +1,6 @@
+﻿order,question,pic_stim_left,pic_stim_right,audio_stim
+1,1,pic1.png,pic6.png,one.wav
+1,2,pic2.png,pic7.png,two.wav
+1,3,pic3.png,pic8.png,three.wav
+1,4,pic4.png,pic9.png,four.wav
+1,5,pic5.png,pic10.png,five.wav

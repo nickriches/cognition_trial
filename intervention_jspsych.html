@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="https://unpkg.com/jspsych@7.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.1"></script> 
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-audio-button-response@1.1.1"></script>
+    <link href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body></body>
+  <script>
+
+    /* initialize jsPsych */
+    var jsPsych = initJsPsych({
+        show_progress_bar: false,
+      on_finish: function() {
+        jsPsych.data.get().localSave('csv','mydata.csv');
+      }
+    });
+
+    /* create timeline */
+    var timeline = [];
+
+
+    /* define welcome message trial */
+    var welcome = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: "Welcome to the experiment. <br><br> You will be asked to complete three surveys. <br><br> The first is a survey called the Autism Spectrum Quotient. It provides a very approximate assessment of autistic traits based on simple questions about your likes, dislikes and habits. <br><br> The second and third surveys ask you for judgements on `comparative` sentences, e.g. Joe is taller than Sandy. <br><br> PLEASE PRESS A KEY TO BEGIN"
+    };
+
+
+timeline.push(welcome);
+
+var trial = {
+    type: jsPsychAudioButtonResponse,
+    stimulus: 'one.wav',
+    choices: ['frog.png', 'dog.png', 'lizard.png'],
+    prompt: "<p>Which animal made the sound?</p>",
+    button_html: '<img src="%choice%" />'
+};
+
+timeline.push(trial)
+
+
+// //     /* define instructions trial */
+// //     var instructions = {
+// //       type: jsPsychHtmlKeyboardResponse,
+// //       stimulus: `<p>Press any key to begin.</p>`,
+// //       post_trial_gap: 1000
+// //     };
+
+
+// // timeline.push(instructions);
+
+
+
+
+
+
+
+// var likert_scale_ASQ = [
+//         "Definitely Agree", 
+//         "Slightly Agree", 
+//         "Slightly Disagree", 
+//         "Definitely Disagree"
+//   ];
+
+
+
+//   var asq = {
+//   type: jsPsychSurveyLikert,
+//   questions: [
+//     {prompt: () => String(jsPsych.timelineVariable(`asq_sentence`)),
+//               labels: likert_scale_ASQ,
+//               required: true}
+//   ],
+//   data: {
+//     likert_response: 'ASQ_response'
+//   },
+//   randomize_question_order: false
+// };
+
+
+// var asq_procedure = {
+//   timeline: [asq],
+//   timeline_variables: asq_questions,
+//   repetitions: 1,
+//   randomize_order: false
+// };
+
+
+// timeline.push(asq_procedure);
+
+
+// var likert_scale_yes_no = [
+//   "Yes",
+//   "No"
+// ];
+
+// var likert_scale_confidence = [
+//         "1. Not at all", 
+//         "2.", 
+//         "3.", 
+//         "4.", 
+//         "5. Completely"
+// ];
+
+// var comparatives_likert_test_yes_no_conf = {
+//   type: jsPsychSurveyLikert,
+//   questions: [
+//     {prompt: () => String(jsPsych.timelineVariable(`sentence`) +
+//               `<br>` + jsPsych.timelineVariable(`question`)),
+//               labels: likert_scale_yes_no,
+//               required: true},
+//     {prompt: () => String(`How confident are you in your answer?`),
+//               labels: likert_scale_confidence,
+//               required: true}
+//   ],
+//   data: {
+//     likert_response: 'yes_no_response'
+//   },
+//   randomize_question_order: false
+// };
+
+
+
+// var comparatives_likert_test_procedure = {
+//   timeline: [comparatives_likert_test_yes_no_conf],
+//   timeline_variables: comparative_stims,
+//   repetitions: 1,
+//   randomize_order: true
+// };
+
+
+// timeline.push(comparatives_likert_test_procedure);
+
+
+// var rating_scale_1_to_20 = [
+//     "Not at all", "1", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "Completely"
+//   ]
+
+// var ratings = {
+//   type: jsPsychSurveyLikert,
+//   questions: [
+//     {prompt: () => String(jsPsych.timelineVariable(`sentence`)) +
+//               `<br>` + jsPsych.timelineVariable(`scale1`),
+//               labels: rating_scale_1_to_20,
+//               required: true},
+//     {prompt: () => String(jsPsych.timelineVariable(`scale2`)),
+//               labels: rating_scale_1_to_20,
+//               required: true}
+//   ],
+//   scale_width: 800,
+//   data: {
+//     likert_response: 'ratings_response'
+//   },
+//   randomize_question_order: false
+// };
+
+
+// var textbox = {
+//   type: jsPsychSurveyText,
+//   questions: [
+//     {prompt: 'Do you have any comments about how you interpret this sentence? (PLEASE SKIP IF YOU HAVE NOTHING TO ADD)', rows: 5}
+//   ]
+// }
+
+// var ratings_test_procedure = {
+//   timeline: [ratings, textbox],
+//   timeline_variables: comparative_stims,
+//   randomize_order: true
+// };
+
+
+
+// timeline.push(ratings_test_procedure);
+
+
+
+
+    /* start the experiment */
+    jsPsych.run(timeline);
+
+  </script>
+</html>
